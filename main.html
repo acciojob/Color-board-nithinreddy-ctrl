@@ -1,16 +1,71 @@
 <!DOCTYPE html>
-
 <html>
+    <head>
+        <title>Color board</title>
+        <style>
+            body{
+                height: 100vh;
+                width: 100vw;
+                margin: 0;
+                padding: 0;
+                background-color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .container{
+                background-color: #111111;
+                width: 80%;
+                height: 80%;
+                display: grid;
+                grid-template-columns: repeat(40,1fr);
+                grid-template-rows: repeat(20,1fr);
+                gap: 5px;
+      
 
-<head>
-	<link rel="stylesheet" href="styles.css">
-</head>
+            }
+     
+            .square{
+                background-color: #1D1D1D;
+                cursor: pointer;
+                transition: backgroundColor ease;
+            }
+        </style>
+    </head>
 
-<body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <body>
+        <div class="container"></div>
+        <script>
+            const container = document.querySelector(".container")
 
-</body>
+            // Create 800 squares
+            for(let i = 1; i<=800; i++){
+                createSquare()
+            }
 
+
+            function createSquare(){
+                const square = document.createElement("div")
+                square.classList.add("square")
+                square.addEventListener("mouseover",addRandomColor)
+                square.addEventListener("mouseout",removeColor)
+                container.appendChild(square)
+            }
+
+            function addRandomColor(e){
+                const square = e.target
+                const randomColor = "#"+ Math.floor(Math.random() * 255 * 255 *255).toString(16).padStart(6,"0")
+
+                square.style.backgroundColor = randomColor
+            }
+
+            function removeColor(e){
+                setTimeout(()=>{
+                    e.target.style.backgroundColor = "";
+                    // e.target.style.transition
+                },1000)
+            }
+
+        </script>
+    </body>
 </html>
